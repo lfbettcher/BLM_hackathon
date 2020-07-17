@@ -1,6 +1,4 @@
-import 'package:blmhackathon/screens/home/homeMenuItem.dart';
 ///File description: Home page for selecting options
-
 import 'package:blmhackathon/shared/constants.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:blmhackathon/screens/menuActions/know_my_rights/know_my_rights.dart';
 import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/access_emergency_contacts.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/document_situation.dart';
+import 'package:blmhackathon/shared/menuItem.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -36,11 +35,11 @@ class _HomeState extends State<Home> {
             SizedBox(height: 40),
             Text("I need to...", style: TextStyle(color: color1, fontSize: 18)),
             SizedBox(height: 40),
-            HomeMenuItem(menuName: "Know my rights", route: MyRights()),
+            MenuItem(menuName: "Know my rights", route: MyRights()),
             SizedBox(height: 20),
-            HomeMenuItem(menuName: "Access my emergency contacts", route: EmergencyContacts()),
+            MenuItem(menuName: "Access my emergency contacts", route: EmergencyContacts()),
             SizedBox(height: 20),
-            HomeMenuItem(menuName: "Document my situation", route: DocumentSituation())
+            MenuItem(menuName: "Document my situation", route: DocumentSituation())
           ],),
         )
 

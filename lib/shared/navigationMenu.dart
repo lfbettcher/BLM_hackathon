@@ -6,6 +6,7 @@ import 'package:blmhackathon/services/database.dart';
 import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
+import 'package:blmhackathon/screens/home/home.dart';
 
 class NavigationMenu extends StatefulWidget {
   @override
@@ -42,6 +43,11 @@ class _NavigationMenuState extends State<NavigationMenu> {
                           Text("Home")
                         ],),
                         onTap: (){
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (BuildContext context) => new Home()));
                         },
                       ),
 

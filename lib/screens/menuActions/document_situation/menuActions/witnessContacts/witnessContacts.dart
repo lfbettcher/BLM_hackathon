@@ -1,5 +1,4 @@
-///File description: Access Emergency Contacts page.
-///User can add, delete, edit and view emergency contacts.
+///File description: View witness contacts page
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/models/user.dart';
 import 'package:blmhackathon/services/database.dart';
@@ -8,12 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 
-class EmergencyContacts extends StatefulWidget {
+class WitnessContactsDocumentation extends StatefulWidget {
   @override
-  _EmergencyContactsState createState() => _EmergencyContactsState();
+  _WitnessContactsDocumentationState createState() => _WitnessContactsDocumentationState();
 }
 
-class _EmergencyContactsState extends State<EmergencyContacts> {
+class _WitnessContactsDocumentationState extends State<WitnessContactsDocumentation> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -21,16 +20,17 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
-        builder: (context, snapshot){
-          if (snapshot.hasData){
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
             UserData userData = snapshot.data;
             return Scaffold(
+
               ///menu slider window
               drawer: NavigationMenu(),
 
               ///app bar
               appBar: new AppBar(
-                  title: new Text("Emergency Contacts")
+                  title: new Text("Witness Contacts")
               ),
 
               ///body
@@ -38,7 +38,7 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
 
             );
           }
-          else{
+          else {
             return Loading();
           }
         }

@@ -11,6 +11,9 @@ const color5 = Color(0xff284b63);
 ///app title
 var title = "Lorem Ipsum";
 
+///list of home screen action items
+
+
 ///component for form text decoration
 const textInputDecoration = InputDecoration(
     //hintText: "Email", this is now a property that is passed as an argument
