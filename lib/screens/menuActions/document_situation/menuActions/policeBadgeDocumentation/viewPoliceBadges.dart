@@ -7,12 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 
-class PoliceBadgeDocumentation extends StatefulWidget {
+class ViewPoliceBadges extends StatefulWidget {
   @override
-  _PoliceBadgeDocumentationState createState() => _PoliceBadgeDocumentationState();
+  _ViewPoliceBadgesState createState() => _ViewPoliceBadgesState();
 }
 
-class _PoliceBadgeDocumentationState extends State<PoliceBadgeDocumentation> {
+class _ViewPoliceBadgesState extends State<ViewPoliceBadges> {
   @override
     Widget build(BuildContext context) {
       final user = Provider.of<User>(context);

@@ -8,8 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:blmhackathon/screens/menuActions/know_my_rights/know_my_rights.dart';
 import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/access_emergency_contacts.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/document_situation.dart';
-import 'package:blmhackathon/shared/menuItem.dart';
-
+import 'package:blmhackathon/screens/home/menuItem.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();

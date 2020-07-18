@@ -6,10 +6,13 @@ import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
-import 'package:blmhackathon/shared/menuItem.dart';
-import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/licensePlateDocumentation/licensePlateDocumentation.dart';
-import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/policeBadgeDocumentation/policeBadgeDocumentation.dart';
-import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/witnessContacts/witnessContacts.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuItem.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/witnessContactsDocumentation/viewWitnessContacts.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/witnessContactsDocumentation/addWitnessContact.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/policeBadgeDocumentation/viewPoliceBadges.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/policeBadgeDocumentation/addPoliceBadge.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/licensePlateDocumentation/viewLicensePlates.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/licensePlateDocumentation/addLicensePlate.dart';
 
 class DocumentSituation extends StatefulWidget {
   @override
@@ -42,11 +45,12 @@ class _DocumentSituationState extends State<DocumentSituation> {
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 40),
-                    MenuItem(menuName: "License Plates", route: LicensePlateDocumentation()),
                     SizedBox(height: 20),
-                    MenuItem(menuName: "Police Badges", route: PoliceBadgeDocumentation()),
+                    MenuItem(menuName: "Police Badges", viewAllItemsRoute: ViewPoliceBadges(), addNewItemRoute: AddPoliceBadge()),
                     SizedBox(height: 20),
-                    MenuItem(menuName: "Witness Contacts", route: WitnessContactsDocumentation()),
+                    MenuItem(menuName: "Witness Contacts", viewAllItemsRoute: ViewWitnessContacts(), addNewItemRoute: AddWitnessContact()),
+                    SizedBox(height: 20),
+                    MenuItem(menuName: "License Plates", viewAllItemsRoute: ViewLicensePlates(), addNewItemRoute: AddLicensePlate()),
                   ],
                 )
               )
