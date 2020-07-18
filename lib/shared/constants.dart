@@ -7,12 +7,10 @@ const color2 = Color(0xff3c6e71);
 const color3 = Color(0xffffffff);
 const color4 = Color(0xffd9d9d9);
 const color5 = Color(0xff284b63);
+const color6 = Color(0xff963D14);
 
 ///app title
 var title = "Lorem Ipsum";
-
-///list of home screen action items
-
 
 ///component for form text decoration
 const textInputDecoration = InputDecoration(
