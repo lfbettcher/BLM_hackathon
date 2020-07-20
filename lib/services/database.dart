@@ -3,6 +3,7 @@ import 'package:blmhackathon/models/witness.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:blmhackathon/models/user.dart';
 import 'package:blmhackathon/models/witness.dart';
+import 'package:blmhackathon/models/contact.dart';
 
 class DatabaseService {
   final String uid;
@@ -40,6 +41,19 @@ class DatabaseService {
     }).toList();
   }
 
+  ///method for getting emergency contact document info
+  List<Contact> _contactListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Contact(
+          contactId: doc.documentID,
+          name: doc.data['name'] ?? '',
+          email: doc.data['email'] ?? '',
+          phone: doc.data['name'] ?? '',
+          altPhone: doc.data['altPhone'] ?? ''
+      );
+    }).toList();
+  }
+
   ///**********************Data Streams****************************///
 
   ///get all user info across the app that we can then listen in on
@@ -58,6 +72,11 @@ class DatabaseService {
   /// get all witnesses
   Stream<List<Witness>> get witnessData{
     return userCollection.document(uid).collection("witnesses").snapshots().map(_witnessListFromSnapshot);
+  }
+
+  /// get all emergency contacts
+  Stream<List<Contact>> get contactData{
+    return userCollection.document(uid).collection("emergency contacts").snapshots().map(_contactListFromSnapshot);
   }
 
   ///**********************Creating new documents****************************///
@@ -80,10 +99,29 @@ class DatabaseService {
     });
   }
 
+  ///create a new emergency contact
+  Future createNewEmergencyContactDocument(String name, String email, String phone, String altPhone) async {
+    print("creating");
+    print(uid);
+    return await userCollection.document(uid)
+        .collection("emergency contacts")
+        .document()
+        .setData({
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'altPhone': altPhone
+    });
+  }
+
   ///**********************Deleting existing documents****************************///
 
   Future deleteWitness(String witnessId) async {
     return await userCollection.document(uid).collection("witnesses").document(witnessId).delete();
+  }
+
+  Future deleteEmergencyContact(String contactId) async {
+    return await userCollection.document(uid).collection("emergency contacts").document(contactId).delete();
   }
 
 ///**********************Updating existing documents****************************///
@@ -95,6 +133,16 @@ class DatabaseService {
           'email' : newWitnessEmail == null ? witness.email : newWitnessEmail,
           'phone' : newWitnessPhone == null ? witness.phone : newWitnessPhone,
           'altPhone' : newWitnessAltPhone == null ? witness.altPhone : newWitnessAltPhone,
+        });
+  }
+
+  Future updateEmergencyContact(Contact contact, String newContactName, String newContactEmail, String newContactPhone, String newContactAltPhone) async {
+    return await userCollection.document(uid).collection("emergency contacts").document(contact.contactId).updateData(
+        {
+          'name' : newContactName == null ? contact.name : newContactName,
+          'email' : newContactEmail == null ? contact.email : newContactEmail,
+          'phone' : newContactPhone == null ? contact.phone : newContactPhone,
+          'altPhone' : newContactAltPhone == null ? contact.altPhone : newContactAltPhone,
         });
   }
 }
