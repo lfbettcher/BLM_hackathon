@@ -29,6 +29,18 @@ class AuthService{
     }
   }
 
+  ///sign in anonymously
+  Future signInAnon() async {
+    try {
+      AuthResult result = await _auth.signInAnonymously();
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   ///register with email and password
   Future registerWithEmailAndPassword(String email, String password, String name) async {
     try{
