@@ -2,11 +2,13 @@
 ///User can add, delete, edit and view emergency contacts.
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/models/user.dart';
+import 'package:blmhackathon/models/contact.dart';
 import 'package:blmhackathon/services/database.dart';
 import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
+import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/emergencyContactsCard.dart';
 
 class EmergencyContacts extends StatefulWidget {
   @override
@@ -19,12 +21,16 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
     final user = Provider.of<User>(context);
     final AuthService _auth = AuthService();
 
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
+    return StreamBuilder<List<Contact>>(
+        stream: DatabaseService(uid: user.uid).contactData,
+
         builder: (context, snapshot){
           if (snapshot.hasData){
-            UserData userData = snapshot.data;
+            List<Contact> eContacts = snapshot.data;
+            print(eContacts.length);
             return Scaffold(
+              resizeToAvoidBottomPadding: false,
+
               ///menu slider window
               drawer: NavigationMenu(),
 
@@ -34,7 +40,23 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
               ),
 
               ///body
-              ///to be implemented
+              body: Center(
+                child: Container(
+                    child: Column(children: <Widget>[
+                      SizedBox(height: 30),
+                      Expanded(
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: eContacts.length,
+                            itemBuilder: (context, index){
+                              return EmergencyContactsCard(emerContact: eContacts[index], userId: user.uid);
+                            }
+                        ),
+                      ),
+                    ],)
+                ),
+              )
 
             );
           }

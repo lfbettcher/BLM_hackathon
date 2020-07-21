@@ -8,6 +8,7 @@ import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'package:blmhackathon/shared/constants.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/document_situation.dart';
+import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/access_emergency_contacts.dart';
 
 class AddEmergencyContact extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
                         Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (BuildContext context) => new DocumentSituation()));
+                                builder: (BuildContext context) => new EmergencyContacts()));
                       },
                     )
                 )
@@ -69,7 +70,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
 
                 ///app bar
                 appBar: new AppBar(
-                    title: new Text("Add A Witness Contact")
+                    title: new Text("Add An Emergency Contact")
                 ),
 
                 ///body
@@ -80,7 +81,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
                             child: Column(
                               children: <Widget>[
                                 SizedBox(height: 30),
-                                Text("Fill out the contact's information: ", style: TextStyle(color: color1, fontSize: 18)),
+                                Text("Fill out the emergency contact's information: ", style: TextStyle(color: color1, fontSize: 18)),
                                 SizedBox(height: 30),
                                 Form(
                                     key: _formKey,
@@ -89,7 +90,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
                                       ///emergency contact name field
                                       TextFormField(
                                         decoration: textInputDecoration.copyWith(hintText: "Name"),
-                                        validator: (val) => val.isEmpty ? "Enter the witness's name" : null, //if it is not valid, return a string, otherwise return null
+                                        validator: (val) => val.isEmpty ? "Enter the emergency contact's name" : null, //if it is not valid, return a string, otherwise return null
                                         onChanged: (val){
                                           setState(() =>contactName = val);
                                         },
@@ -107,7 +108,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
                                       ///phone field
                                       TextFormField(
                                         decoration: textInputDecoration.copyWith(hintText: "Phone"),
-                                        validator: (val) => val.isEmpty ? "Enter the witness's phone" : null,
+                                        validator: (val) => val.isEmpty ? "Enter the emergency contact's phone" : null,
                                         onChanged: (val){
                                           setState(() =>contactPhone = val);
                                         },
