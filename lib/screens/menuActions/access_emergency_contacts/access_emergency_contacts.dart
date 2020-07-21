@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/emergencyContactsCard.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuItem.dart';
+import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/addEmergencyContact.dart';
 
 class EmergencyContacts extends StatefulWidget {
   @override
@@ -54,6 +56,8 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
                             }
                         ),
                       ),
+                      SizedBox(height: 20),
+                      MenuItem(menuName: "Add Contact", addNewItemRoute: AddEmergencyContact())
                     ],)
                 ),
               )
