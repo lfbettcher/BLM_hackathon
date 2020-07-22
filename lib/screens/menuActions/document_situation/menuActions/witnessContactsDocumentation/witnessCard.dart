@@ -15,8 +15,6 @@ class WitnessCard extends StatefulWidget {
 }
 
 class _WitnessCardState extends State<WitnessCard> {
-  final _formKey = GlobalKey<FormState>(); //form key for editing the witness's info
-
   @override
   Widget build(BuildContext context) {
 
@@ -44,8 +42,8 @@ class _WitnessCardState extends State<WitnessCard> {
                   textColor: Colors.white,
                   child: Text("No")),
             ],)
-        );
-      }
+          );
+        }
       );
     }
 

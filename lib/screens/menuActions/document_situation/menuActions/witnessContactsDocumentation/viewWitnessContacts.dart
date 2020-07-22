@@ -7,7 +7,6 @@ import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
-import 'package:blmhackathon/shared/constants.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/witnessContactsDocumentation/witnessCard.dart';
 
 class ViewWitnessContacts extends StatefulWidget {
@@ -23,7 +22,6 @@ class _ViewWitnessContactsState extends State<ViewWitnessContacts> {
 
     return StreamBuilder<List<Witness>>(
         stream: DatabaseService(uid: user.uid).witnessData,
-
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Witness> witnesses = snapshot.data;

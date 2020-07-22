@@ -1,3 +1,4 @@
+import 'package:blmhackathon/models/policeBadge.dart';
 import 'package:blmhackathon/models/witness.dart';
 ///File description: This contains database functions for storing documents.
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,7 +36,7 @@ class DatabaseService {
         witnessId: doc.documentID,
         name: doc.data['name'] ?? '',
         email: doc.data['email'] ?? '',
-        phone: doc.data['name'] ?? '',
+        phone: doc.data['phone'] ?? '',
         altPhone: doc.data['altPhone'] ?? ''
       );
     }).toList();
@@ -48,8 +49,18 @@ class DatabaseService {
           contactId: doc.documentID,
           name: doc.data['name'] ?? '',
           email: doc.data['email'] ?? '',
-          phone: doc.data['name'] ?? '',
+          phone: doc.data['phone'] ?? '',
           altPhone: doc.data['altPhone'] ?? ''
+      );
+    }).toList();
+  }
+
+  ///method for getting police badge number
+  List<Badge> _policeBadgeListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return Badge(
+        badgeId: doc.documentID,
+        badgeNumber: doc.data['badgeNumber'],
       );
     }).toList();
   }
@@ -79,6 +90,11 @@ class DatabaseService {
     return userCollection.document(uid).collection("emergency contacts").snapshots().map(_contactListFromSnapshot);
   }
 
+  /// get all police badges
+  Stream<List<Badge>> get badgeData{
+    return userCollection.document(uid).collection("policeBadges").snapshots().map(_policeBadgeListFromSnapshot);
+  }
+
   ///**********************Creating new documents****************************///
 
   ///new document created upon registration
@@ -87,10 +103,9 @@ class DatabaseService {
       'name': name,
     });
   }
+
   ///create a new witness
   Future createNewWitnessDocument(String name, String email, String phone, String altPhone) async {
-    print("creating");
-    print(uid);
     return await userCollection.document(uid).collection("witnesses").document().setData({
       'name' : name,
       'email' : email,
@@ -101,8 +116,6 @@ class DatabaseService {
 
   ///create a new emergency contact
   Future createNewEmergencyContactDocument(String name, String email, String phone, String altPhone) async {
-    print("creating");
-    print(uid);
     return await userCollection.document(uid)
         .collection("emergency contacts")
         .document()
@@ -114,6 +127,13 @@ class DatabaseService {
     });
   }
 
+  ///create a new police badge
+  Future createNewPoliceBadgeDocument(String badgeNumber) async {
+    return await userCollection.document(uid).collection("policeBadges").document().setData({
+      'badgeNumber' : badgeNumber,
+    });
+  }
+
   ///**********************Deleting existing documents****************************///
 
   Future deleteWitness(String witnessId) async {
@@ -122,6 +142,10 @@ class DatabaseService {
 
   Future deleteEmergencyContact(String contactId) async {
     return await userCollection.document(uid).collection("emergency contacts").document(contactId).delete();
+  }
+
+  Future deleteBadge(String badgeId) async {
+    return await userCollection.document(uid).collection("policeBadges").document(badgeId).delete();
   }
 
 ///**********************Updating existing documents****************************///
