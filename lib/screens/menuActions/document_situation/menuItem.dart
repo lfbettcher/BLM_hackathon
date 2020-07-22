@@ -38,16 +38,23 @@ class _MenuItemState extends State<MenuItem> {
                               builder: (context) => widget.viewAllItemsRoute));
                     },
                   ),
-                  SizedBox(width: 15),
+                  SizedBox(width: 25),
 
-                  ///tap this add icon to go to a page where you can add a new object
                   GestureDetector(
-                      child: Icon(Icons.add_circle_outline),
-                      onTap: (){
-                        Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => widget.addNewItemRoute));
-                      }
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: color6,
+                          borderRadius: BorderRadius.all(Radius.circular(100))
+                      ),
+                      width: 50,
+                      height: 50,
+                      child: Icon(Icons.add, color: color3)
+                    ),
+                    onTap: (){
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => widget.addNewItemRoute));
+                    }
                   )
               ],
            )

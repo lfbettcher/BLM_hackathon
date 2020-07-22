@@ -9,8 +9,8 @@ import 'package:blmhackathon/screens/menuActions/know_my_rights/know_my_rights.d
 import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/access_emergency_contacts.dart';
 import 'package:blmhackathon/screens/menuActions/access_emergency_contacts/addEmergencyContact.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/document_situation.dart';
-//import 'package:blmhackathon/screens/home/menuItem.dart';
-import 'package:blmhackathon/screens/menuActions/document_situation/menuItem.dart';
+import 'package:blmhackathon/screens/home/menuItem.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -36,11 +36,11 @@ class _HomeState extends State<Home> {
             SizedBox(height: 40),
             Text("I need to...", style: TextStyle(color: color1, fontSize: 18)),
             SizedBox(height: 40),
-            MenuItem(menuName: "Know my rights", viewAllItemsRoute: MyRights()),
+            MenuItem(menuName: "Know my rights", route: MyRights()),
             SizedBox(height: 20),
-            MenuItem(menuName: "Access my emergency contacts", viewAllItemsRoute: EmergencyContacts(), addNewItemRoute: AddEmergencyContact()),
+            MenuItem(menuName: "Access my emergency contacts", route: EmergencyContacts()),
             SizedBox(height: 20),
-            MenuItem(menuName: "Document my situation", viewAllItemsRoute: DocumentSituation())
+            MenuItem(menuName: "Document my situation", route: DocumentSituation())
           ],),
         )
 
