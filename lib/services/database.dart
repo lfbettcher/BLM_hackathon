@@ -10,6 +10,7 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
   final CollectionReference userCollection = Firestore.instance.collection('users');
+  String currentEditingDocument;
 
   ///**********************Object Formatters****************************///
 
@@ -95,6 +96,11 @@ class DatabaseService {
     return userCollection.document(uid).collection("policeBadges").snapshots().map(_policeBadgeListFromSnapshot);
   }
 
+  /// get current editing document
+  String get docId{
+    return currentEditingDocument;
+  }
+
   ///**********************Creating new documents****************************///
 
   ///new document created upon registration
@@ -134,6 +140,44 @@ class DatabaseService {
     });
   }
 
+  ///create a new date/time/location stamp
+  Future createNewDateTimeLocationStampDocument(String date, String time, String latitude, String longitude) async {
+    return await userCollection.document(uid).collection("dateTimeLocationStamps").document().setData({
+      'date' : date,
+      'time' : time,
+      'latitude' : latitude,
+      'longitude' : longitude
+    });
+  }
+
+  ///create a new pdf structure for police complaints. Called on when the user starts on a new document and submits a name.
+  Future createNewPoliceComplaint(String docName) async {
+    await userCollection.document(uid).collection("policeComplaints").document().setData({
+      'documentName' : docName,
+      'complaintReasons' : '',
+      'date' : '',
+      'time' : '',
+      'location' : '',
+      'policeBadges' : '',
+      'witnesses' : '',
+      'incidentDetails' : ''
+    });
+
+    ///set the document ID
+    CollectionReference docRef = userCollection.document(uid).collection("policeComplaints");
+    docRef.getDocuments().then((ds){
+      if (ds != null){
+        ds.documents.forEach((value){
+          print(value.data['documentName']);
+          if (value.data['documentName'] == docName){
+            //print(value.documentID);
+            currentEditingDocument = value.documentID;
+          }
+        });
+      }
+    });
+  }
+
   ///**********************Deleting existing documents****************************///
 
   Future deleteWitness(String witnessId) async {
@@ -153,20 +197,22 @@ class DatabaseService {
   Future updateWitness(Witness witness, String newWitnessName, String newWitnessEmail, String newWitnessPhone, String newWitnessAltPhone) async {
     return await userCollection.document(uid).collection("witnesses").document(witness.witnessId).updateData(
         {
-          'name' : newWitnessName == null ? witness.name : newWitnessName,
-          'email' : newWitnessEmail == null ? witness.email : newWitnessEmail,
-          'phone' : newWitnessPhone == null ? witness.phone : newWitnessPhone,
-          'altPhone' : newWitnessAltPhone == null ? witness.altPhone : newWitnessAltPhone,
+          'name' : newWitnessName == '' ? witness.name : newWitnessName,
+          'email' : newWitnessEmail == '' ? witness.email : newWitnessEmail,
+          'phone' : newWitnessPhone == '' ? witness.phone : newWitnessPhone,
+          'altPhone' : newWitnessAltPhone == '' ? witness.altPhone : newWitnessAltPhone,
         });
   }
 
   Future updateEmergencyContact(Contact contact, String newContactName, String newContactEmail, String newContactPhone, String newContactAltPhone) async {
     return await userCollection.document(uid).collection("emergency contacts").document(contact.contactId).updateData(
         {
-          'name' : newContactName == null ? contact.name : newContactName,
-          'email' : newContactEmail == null ? contact.email : newContactEmail,
-          'phone' : newContactPhone == null ? contact.phone : newContactPhone,
-          'altPhone' : newContactAltPhone == null ? contact.altPhone : newContactAltPhone,
+          'name' : newContactName == '' ? contact.name : newContactName,
+          'email' : newContactEmail == '' ? contact.email : newContactEmail,
+          'phone' : newContactPhone == '' ? contact.phone : newContactPhone,
+          'altPhone' : newContactAltPhone == '' ? contact.altPhone : newContactAltPhone,
         });
   }
+
 }
+

@@ -31,7 +31,7 @@ class _MenuItemState extends State<MenuItem> {
                   GestureDetector(
                     child: Container(
                         alignment: Alignment.center,
-                        child: Text(widget.menuName, style: TextStyle(color: color1, fontSize: 18))),
+                        child: Text(widget.menuName, style: TextStyle(color: color1, fontSize: defaultFontSize))),
                     onTap: (){
                       Navigator.of(context).push(
                           MaterialPageRoute(

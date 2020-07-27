@@ -17,12 +17,12 @@ class _MenuItemState extends State<MenuItem> {
     return GestureDetector(
       child: Container(
           width: 300,
-          height: 90,
+          height: 80,
           decoration: new BoxDecoration(
               color: color4,
               borderRadius: BorderRadius.all(Radius.circular(20))
           ),
-          child: Center(child: Text(widget.menuName, style: TextStyle(color: color1, fontSize: 18)))
+          child: Center(child: Text(widget.menuName, style: TextStyle(color: color1, fontSize: defaultFontSize)))
       ),
       onTap: (){
         Navigator.of(context).push(

@@ -133,7 +133,7 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(height: 30),
-                          Text("Pick an image: ", style: TextStyle(color: color1, fontSize: 18)),
+                          Text("Pick an image: ", style: TextStyle(color: color1, fontSize: defaultFontSize)),
                           SizedBox(height: 30),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,13 +166,13 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                                 ],),
                               ]),
                           isImageLoaded ? Container(
-                              child: Text("Badge # ${_policeBadge}", style: TextStyle(color: color1, fontSize: 18))
+                              child: Text("Badge # ${_policeBadge}", style: TextStyle(color: color1, fontSize: defaultFontSize))
                           ) : Container(),
 
                           SizedBox(height: 30),
-                          Text("OR", style: TextStyle(color: color1, fontSize: 18)),
+                          Text("OR", style: TextStyle(color: color1, fontSize: defaultFontSize)),
                           SizedBox(height: 30),
-                          Text("Manually type in the badge number:", style: TextStyle(color: color1, fontSize: 18)),
+                          Text("Manually type in the badge number:", style: TextStyle(color: color1, fontSize: defaultFontSize)),
                           SizedBox(height: 30),
                           Form(
                             key: _formKey,
@@ -192,7 +192,7 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                           SizedBox(height: 20),
                           RaisedButton(
                             color: color5,
-                            child:  Center(child: Text("Enter", style: TextStyle(fontSize: 18.0, color: Colors.white))),
+                            child:  Center(child: Text("Enter", style: TextStyle(fontSize: defaultFontSize, color: color3))),
                             onPressed: () async {
                               if (_formKey.currentState.validate()){
                                 await DatabaseService(uid: user.uid).createNewPoliceBadgeDocument(_policeBadge);

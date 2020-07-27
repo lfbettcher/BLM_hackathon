@@ -57,11 +57,11 @@ class _WitnessCardState extends State<WitnessCard> {
                 title: Text(widget.witness.name, style: TextStyle(fontSize: 22)),
                 subtitle: Column(children: <Widget>[
                   SizedBox(height: 15),
-                  Text("Email: ${widget.witness.email}", style: TextStyle(fontSize: 16)),
+                  Text("Email: ${widget.witness.email}", style: TextStyle(fontSize: defaultFontSize)),
                   SizedBox(height: 15),
-                  Text("Phone: ${widget.witness.phone}", style: TextStyle(fontSize: 16)),
+                  Text("Phone: ${widget.witness.phone}", style: TextStyle(fontSize: defaultFontSize)),
                   SizedBox(height: 15),
-                  Text("Alternate Phone: ${widget.witness.altPhone}", style: TextStyle(fontSize: 16)),
+                  Text("Alternate Phone: ${widget.witness.altPhone}", style: TextStyle(fontSize: defaultFontSize)),
                   SizedBox(height: 15),
                   ButtonBar(
                     children: <Widget>[

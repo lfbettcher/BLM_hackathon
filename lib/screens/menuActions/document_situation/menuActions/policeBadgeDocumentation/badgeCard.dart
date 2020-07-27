@@ -1,8 +1,8 @@
-import 'package:blmhackathon/models/policeBadge.dart';
 ///File description: Card layout for an individual badge
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/services/database.dart';
 import 'package:blmhackathon/shared/constants.dart';
+import 'package:blmhackathon/models/policeBadge.dart';
 
 class BadgeCard extends StatefulWidget {
   final Badge badge;
@@ -31,7 +31,7 @@ class _BadgeCardState extends State<BadgeCard> {
                     await DatabaseService(uid: widget.userId).deleteBadge(widget.badge.badgeId);
                     Navigator.of(context).pop();
                   },
-                  textColor: Colors.white,
+                  textColor: color3,
                   child: Text("Yes")),
               SizedBox(width: 55),
               RaisedButton(
@@ -39,7 +39,7 @@ class _BadgeCardState extends State<BadgeCard> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  textColor: Colors.white,
+                  textColor: color3,
                   child: Text("No")),
             ],)
         );
@@ -55,7 +55,8 @@ class _BadgeCardState extends State<BadgeCard> {
                 child: Column(
                   children: <Widget>[
                       ListTile(
-                          title: Text("#${widget.badge.badgeNumber}"
+                          title: Text("#${widget.badge.badgeNumber}",
+                            style: TextStyle(fontSize: defaultFontSize),
                           )),
                       FlatButton(
                         textColor: color6,
@@ -70,8 +71,6 @@ class _BadgeCardState extends State<BadgeCard> {
                       ),
                   ],
                 )
-
-
               )
             ),
     );

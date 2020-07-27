@@ -1,3 +1,4 @@
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/dateTimeStampDocumentation/dateTimeLocationStamp.dart';
 ///File description: Root page for documentation.
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/models/user.dart';
@@ -51,6 +52,8 @@ class _DocumentSituationState extends State<DocumentSituation> {
                     MenuItem(menuName: "Witness Contacts", viewAllItemsRoute: ViewWitnessContacts(), addNewItemRoute: AddWitnessContact()),
                     SizedBox(height: 20),
                     MenuItem(menuName: "License Plates", viewAllItemsRoute: ViewLicensePlates(), addNewItemRoute: AddLicensePlate()),
+                    SizedBox(height: 20),
+                    MenuItem(menuName: "Date/Time Stamps", viewAllItemsRoute: DateTimeLocationStamp(), addNewItemRoute: DateTimeLocationStamp()),
                   ],
                 )
               )

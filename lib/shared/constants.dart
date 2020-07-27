@@ -9,12 +9,14 @@ const color4 = Color(0xffd9d9d9);
 const color5 = Color(0xff284b63);
 const color6 = Color(0xff963D14);
 
+///default app font size
+double defaultFontSize = 18;
+
 ///app title
 var title = "Lorem Ipsum";
 
 ///component for form text decoration
 const textInputDecoration = InputDecoration(
-    //hintText: "Email", this is now a property that is passed as an argument
     fillColor: Colors.white,
     filled: true,
     enabledBorder: OutlineInputBorder( //field that is not in focus will have these border properties
