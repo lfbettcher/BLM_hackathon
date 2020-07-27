@@ -88,9 +88,9 @@ class _NotifyContactCardState extends State<NotifyContactCard> {
 
                     ///twilio setup
                     TwilioFlutter twilioFlutter = TwilioFlutter(
-                        accountSid : 'AC5b6db28dc9b48b60f046a54ae68fe033',
-                        authToken : '5f8aec09aa814659511cff58f8792d4e',
-                        twilioNumber : '+12512610034'
+                        accountSid : 'xxxxxxxxxxxxxxxxx',
+                        authToken : 'xxxxxxxxxxxxxxxxxxxxxxxx',
+                        twilioNumber : 'xxxxxxxxxxxxx'
                     );
 
                     /*
