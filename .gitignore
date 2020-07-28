@@ -40,3 +40,5 @@ ios/Flutter/Debug.xcconfig
 ios/Flutter/Release.xcconfig
 ios/Podfile
 pubspec.lock
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig

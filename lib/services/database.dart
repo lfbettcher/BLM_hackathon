@@ -1,10 +1,11 @@
+///File description: This contains database functions for storing documents.
 import 'package:blmhackathon/models/policeBadge.dart';
 import 'package:blmhackathon/models/witness.dart';
-///File description: This contains database functions for storing documents.
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:blmhackathon/models/user.dart';
 import 'package:blmhackathon/models/witness.dart';
 import 'package:blmhackathon/models/contact.dart';
+import 'package:blmhackathon/models/licensePlate.dart';
 
 class DatabaseService {
   final String uid;
@@ -66,6 +67,16 @@ class DatabaseService {
     }).toList();
   }
 
+  ///method for getting license plate number
+  List<License> _licensePlateListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return License(
+        licenseId: doc.documentID,
+        licenseNumber: doc.data['licenseNumber'],
+      );
+    }).toList();
+  }
+
   ///**********************Data Streams****************************///
 
   ///get all user info across the app that we can then listen in on
@@ -94,6 +105,11 @@ class DatabaseService {
   /// get all police badges
   Stream<List<Badge>> get badgeData{
     return userCollection.document(uid).collection("policeBadges").snapshots().map(_policeBadgeListFromSnapshot);
+  }
+
+  /// get all license plates
+  Stream<List<License>> get licenseData{
+    return userCollection.document(uid).collection("licensePlates").snapshots().map(_licensePlateListFromSnapshot);
   }
 
   /// get current editing document
@@ -137,6 +153,13 @@ class DatabaseService {
   Future createNewPoliceBadgeDocument(String badgeNumber) async {
     return await userCollection.document(uid).collection("policeBadges").document().setData({
       'badgeNumber' : badgeNumber,
+    });
+  }
+
+  ///create a new license plate
+  Future createNewLicensePlateDocument(String licenseNumber) async {
+    return await userCollection.document(uid).collection("licensePlates").document().setData({
+      'licenseNumber' : licenseNumber,
     });
   }
 
