@@ -7,14 +7,15 @@ import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
+import 'dart:convert'; // for json
 
 class MyRights extends StatefulWidget {
+  static final String rightsJson = '{"rights": [{"title": "I\'ve been pulled over", "body": "\u2022 do this thing"}, {"title": "Police are at my door", "body": "\u2022 do this thing \u2022 do this other thing"}]}';
+  static final List rightsList = jsonDecode(rightsJson)["rights"] as List;
+  final List<Rights> list = rightsList.map((rights) => Rights.fromJson(rights)).toList();
+
   @override
-  _MyRightsState createState() => _MyRightsState([
-    Rights("Title1", "body text", false),
-    Rights("Title2", "body text", false),
-    Rights("Title3", "body text", false),
-  ]);
+  _MyRightsState createState() => _MyRightsState(list);
 }
 
 class _MyRightsState extends State<MyRights> {
@@ -24,7 +25,7 @@ class _MyRightsState extends State<MyRights> {
 
   _onExpansion(int index, bool isExpanded) {
     setState(() {
-      _list[index].expanded = !(_list[index].expanded);
+      _list[index].isExpanded = !(_list[index].isExpanded);
     });
   }
 
@@ -37,10 +38,11 @@ class _MyRightsState extends State<MyRights> {
     for (int i = 0, li = _list.length; i < li; i++) {
       var expansionData = _list[i];
       myRights.add(ExpansionPanel(
+        canTapOnHeader: true,
           headerBuilder: (BuildContext context, bool isExpanded) {
             return Padding(
                 padding: EdgeInsets.all(20.0),
-                child: Text(expansionData._title,
+                child: Text(expansionData.title,
                     style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold
                     )
                 )
@@ -48,14 +50,13 @@ class _MyRightsState extends State<MyRights> {
           },
           body: Padding(
               padding: EdgeInsets.all(20.0),
-              child: Text(expansionData._body,
+              child: Text(expansionData.body,
                   style: TextStyle(
                       fontSize: 20.0,
-                      fontStyle: FontStyle.italic
                   )
               )
           ),
-          isExpanded: expansionData._expanded
+          isExpanded: expansionData.isExpanded
       )
       );
     }
@@ -78,9 +79,10 @@ class _MyRightsState extends State<MyRights> {
                 ///body
                 body: SingleChildScrollView(
                     child: Container(
-                      margin: const EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.all(16.0),
                       child: new ExpansionPanelList(
-                          children: myRights, expansionCallback: _onExpansion),
+                          children: myRights, expansionCallback: _onExpansion
+                      ),
                     )
                 )
             );
@@ -93,32 +95,12 @@ class _MyRightsState extends State<MyRights> {
 }
 
 class Rights {
-  String _title, _body;
-  bool _expanded;
+  String title, body;
+  bool isExpanded;
 
-  Rights(this._title, this._body, this._expanded);
+  Rights(this.title, this.body, {this.isExpanded = false});
 
-  @override
-  String toString() {
-    return "Rights(_title: $_title, _body: $_body, _expanded: $_expanded)";
+  factory Rights.fromJson(dynamic json) {
+    return Rights(json["title"] as String, json["body"] as String);
   }
-
-  bool get expanded => _expanded;
-
-  set expanded(bool value) {
-    _expanded = value;
-  }
-
-  get body => _body;
-
-  set body(value) {
-    _body = value;
-  }
-
-  String get title => _title;
-
-  set title(String value) {
-    _title = value;
-  }
-
 }
