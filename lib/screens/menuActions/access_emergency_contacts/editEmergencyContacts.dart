@@ -66,7 +66,7 @@ class _EditEmergencyContactsState extends State<EditEmergencyContacts> {
             UserData userData = snapshot.data;
             return
               Scaffold(
-                  resizeToAvoidBottomPadding: false,
+                  resizeToAvoidBottomInset: true,
 
                   ///menu slider window
                   drawer: NavigationMenu(),
@@ -81,7 +81,7 @@ class _EditEmergencyContactsState extends State<EditEmergencyContacts> {
                       child: SafeArea(
                           child: Container(
                               margin: const EdgeInsets.all(20.0),
-                              child: Column(
+                              child: ListView(
                                 children: <Widget>[
                                   SizedBox(height: 30),
                                   Text("Update with changes: ", style: TextStyle(color: color1, fontSize: 18)),

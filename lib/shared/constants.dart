@@ -8,6 +8,7 @@ const color3 = Color(0xffffffff);
 const color4 = Color(0xffd9d9d9);
 const color5 = Color(0xff284b63);
 const color6 = Color(0xff963D14);
+const color7 = Color(0xff6cb9f0);
 
 ///default app font size
 double defaultFontSize = 18;

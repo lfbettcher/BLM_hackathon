@@ -1,3 +1,4 @@
+import 'package:blmhackathon/models/dateTimeLocationStamp.dart';
 import 'package:blmhackathon/models/policeBadge.dart';
 import 'package:blmhackathon/models/witness.dart';
 ///File description: This contains database functions for storing documents.
@@ -66,6 +67,19 @@ class DatabaseService {
     }).toList();
   }
 
+  ///method for getting date time location stamps
+  List<DateTimeLocationStamp>_dateTimeLocationStampListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return DateTimeLocationStamp(
+        dateTimeLocationId: doc.documentID,
+        date: doc.data['date'],
+        latitude: doc.data['latitude'],
+        longitude: doc.data['longitude'],
+        time: doc.data['time']
+      );
+    }).toList();
+  }
+
   ///**********************Data Streams****************************///
 
   ///get all user info across the app that we can then listen in on
@@ -94,6 +108,11 @@ class DatabaseService {
   /// get all police badges
   Stream<List<Badge>> get badgeData{
     return userCollection.document(uid).collection("policeBadges").snapshots().map(_policeBadgeListFromSnapshot);
+  }
+
+  /// get all date time location stamps
+  Stream<List<DateTimeLocationStamp>> get dateTimeLocationData{
+    return userCollection.document(uid).collection("dateTimeLocationStamps").snapshots().map(_dateTimeLocationStampListFromSnapshot);
   }
 
   /// get current editing document

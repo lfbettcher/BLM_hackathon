@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
             SizedBox(height: 20),
             MenuItem(menuName: "Document my situation", route: DocumentSituation()),
             SizedBox(height: 20),
-            MenuItem(menuName: "Manage police complaints", route: PoliceComplaintPage1()),
+            MenuItem(menuName: "Create a police complaint", route: PoliceComplaintPage1()),
             SizedBox(height: 20),
             MenuItem(menuName: "Notify a contact of my arrest", route: NotifyArrest()),
           ],),
