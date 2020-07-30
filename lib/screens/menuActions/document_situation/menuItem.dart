@@ -16,10 +16,10 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-          width: 300,
+          width: 375,
           height: 90,
           decoration: new BoxDecoration(
-              color: color4,
+              color: color5,
               borderRadius: BorderRadius.all(Radius.circular(20))
           ),
           child: Center(
@@ -31,7 +31,7 @@ class _MenuItemState extends State<MenuItem> {
                   GestureDetector(
                     child: Container(
                         alignment: Alignment.center,
-                        child: Text(widget.menuName, style: TextStyle(color: color1, fontSize: defaultFontSize))),
+                        child: Text(widget.menuName, style: TextStyle(color: color3, fontSize: 25))),
                     onTap: (){
                       Navigator.of(context).push(
                           MaterialPageRoute(

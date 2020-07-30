@@ -10,7 +10,7 @@ const color5 = Color(0xff284b63);
 const color6 = Color(0xff963D14);
 
 ///default app font size
-double defaultFontSize = 18;
+double defaultFontSize = 20;
 
 ///app title
 var title = "Lorem Ipsum";

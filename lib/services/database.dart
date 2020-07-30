@@ -215,6 +215,10 @@ class DatabaseService {
     return await userCollection.document(uid).collection("policeBadges").document(badgeId).delete();
   }
 
+  Future deleteLicense(String licenseId) async {
+    return await userCollection.document(uid).collection("licensePlates").document(licenseId).delete();
+  }
+
 ///**********************Updating existing documents****************************///
 
   Future updateWitness(Witness witness, String newWitnessName, String newWitnessEmail, String newWitnessPhone, String newWitnessAltPhone) async {

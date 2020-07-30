@@ -142,8 +142,8 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                                   RaisedButton(
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Camera"),
-                                        SizedBox(width: 10),
+                                        Text("Camera", style: TextStyle(fontSize: 25)),
+                                        SizedBox(width: 15),
                                         Icon(Icons.camera)
                                       ],
                                     ),
@@ -154,8 +154,8 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                                   RaisedButton(
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Gallery"),
-                                        SizedBox(width: 10),
+                                        Text("Gallery", style: TextStyle(fontSize: 25)),
+                                        SizedBox(width: 15),
                                         Icon(Icons.photo_album)
                                       ],
                                     ),

@@ -79,11 +79,15 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
 
     String licenseNumber = '';
     for (TextBlock block in readText.blocks){
+      print('hello');
       for (TextLine line in block.lines){
+        print('i am');
         for (TextElement word in line.elements){
-          if (isNumeric(word.text)){
-            licenseNumber += word.text;
-          }
+          print('here');
+//          if (isNumeric(word.text)){
+//            licenseNumber += word.text;
+//          }
+          licenseNumber += word.text;
           print(word.text);
         }
       }
@@ -142,8 +146,8 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
                                   RaisedButton(
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Camera"),
-                                        SizedBox(width: 10),
+                                        Text("Camera", style: TextStyle(fontSize: 25)),
+                                        SizedBox(width: 15),
                                         Icon(Icons.camera)
                                       ],
                                     ),
@@ -154,8 +158,8 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
                                   RaisedButton(
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Gallery"),
-                                        SizedBox(width: 10),
+                                        Text("Gallery", style: TextStyle(fontSize: 25)),
+                                        SizedBox(width: 15),
                                         Icon(Icons.photo_album)
                                       ],
                                     ),
@@ -166,7 +170,7 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
                                 ],),
                               ]),
                           isImageLoaded ? Container(
-                              child: Text("License # ${_licensePlate}", style: TextStyle(color: color1, fontSize: defaultFontSize))
+                              child: Text("License # $_licensePlate", style: TextStyle(color: color1, fontSize: defaultFontSize))
                           ) : Container(),
 
                           SizedBox(height: 30),

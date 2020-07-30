@@ -28,7 +28,7 @@ class _LicenseCardState extends State<LicenseCard> {
               RaisedButton(
                   color: color2,
                   onPressed: () async {
-                    await DatabaseService(uid: widget.userId).deleteBadge(widget.license.licenseId);
+                    await DatabaseService(uid: widget.userId).deleteLicense(widget.license.licenseId);
                     Navigator.of(context).pop();
                   },
                   textColor: color3,
