@@ -1,11 +1,12 @@
-import 'package:blmhackathon/models/dateTimeLocationStamp.dart';
+///File description: This contains database functions for storing documents.
 import 'package:blmhackathon/models/policeBadge.dart';
 import 'package:blmhackathon/models/witness.dart';
-///File description: This contains database functions for storing documents.
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:blmhackathon/models/user.dart';
-import 'package:blmhackathon/models/witness.dart';
 import 'package:blmhackathon/models/contact.dart';
+import 'package:blmhackathon/models/licensePlate.dart';
+import 'package:blmhackathon/models/dateTimeLocationStamp.dart';
+
 
 class DatabaseService {
   final String uid;
@@ -67,15 +68,27 @@ class DatabaseService {
     }).toList();
   }
 
+
   ///method for getting date time location stamps
   List<DateTimeLocationStamp>_dateTimeLocationStampListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
-      return DateTimeLocationStamp(
-        dateTimeLocationId: doc.documentID,
-        date: doc.data['date'],
-        latitude: doc.data['latitude'],
-        longitude: doc.data['longitude'],
-        time: doc.data['time']
+        return DateTimeLocationStamp(
+          dateTimeLocationId: doc.documentID,
+          date: doc.data['date'],
+          latitude: doc.data['latitude'],
+          longitude: doc.data['longitude'],
+          time: doc.data['time']
+        );
+      }).toList();
+    }
+
+
+  ///method for getting license plate number
+  List<License> _licensePlateListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return License(
+        licenseId: doc.documentID,
+        licenseNumber: doc.data['licenseNumber'],
       );
     }).toList();
   }
@@ -111,8 +124,18 @@ class DatabaseService {
   }
 
   /// get all date time location stamps
-  Stream<List<DateTimeLocationStamp>> get dateTimeLocationData{
-    return userCollection.document(uid).collection("dateTimeLocationStamps").snapshots().map(_dateTimeLocationStampListFromSnapshot);
+  Stream<List<DateTimeLocationStamp>> get dateTimeLocationData {
+    return userCollection.document(uid)
+        .collection("dateTimeLocationStamps")
+        .snapshots()
+        .map(_dateTimeLocationStampListFromSnapshot);
+  }
+
+  /// get all license plates
+  Stream<List<License>> get licenseData {
+    return userCollection.document(uid).collection("licensePlates")
+        .snapshots()
+        .map(_licensePlateListFromSnapshot);
   }
 
   /// get current editing document
@@ -156,6 +179,13 @@ class DatabaseService {
   Future createNewPoliceBadgeDocument(String badgeNumber) async {
     return await userCollection.document(uid).collection("policeBadges").document().setData({
       'badgeNumber' : badgeNumber,
+    });
+  }
+
+  ///create a new license plate
+  Future createNewLicensePlateDocument(String licenseNumber) async {
+    return await userCollection.document(uid).collection("licensePlates").document().setData({
+      'licenseNumber' : licenseNumber,
     });
   }
 
