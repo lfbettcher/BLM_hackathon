@@ -63,7 +63,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
           if (snapshot.hasData) {
             UserData userData = snapshot.data;
             return Scaffold(
-                resizeToAvoidBottomPadding: false,
+                resizeToAvoidBottomInset: true,
 
                 ///menu slider window
                 drawer: NavigationMenu(),
@@ -78,7 +78,7 @@ class _AddEmergencyContactState extends State<AddEmergencyContact> {
                     child: SafeArea(
                         child: Container(
                             margin: const EdgeInsets.all(20.0),
-                            child: Column(
+                            child: ListView(
                               children: <Widget>[
                                 SizedBox(height: 30),
                                 Text("Fill out the emergency contact's information: ", style: TextStyle(color: color1, fontSize: 18)),

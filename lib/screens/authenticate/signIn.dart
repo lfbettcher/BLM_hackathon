@@ -23,12 +23,12 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: true,
         body: Center(
           child: SafeArea(
             child: Container(
                 margin: const EdgeInsets.all(20.0),
-                child: Column(
+                child: ListView(
                   children: <Widget>[
                     SizedBox(height: 100.0),
                     Text(title, style: titleDecoration),
