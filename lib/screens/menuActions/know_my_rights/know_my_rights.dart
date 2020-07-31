@@ -8,7 +8,7 @@ import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
-import 'dart:convert'; // for json
+//import 'dart:convert'; // for json
 
 class MyRights extends StatefulWidget {
   @override
@@ -17,25 +17,44 @@ class MyRights extends StatefulWidget {
 
 class _MyRightsState extends State<MyRights> {
 
+  static final bodyTextSize = 20.0;
+
   List<Rights> rightsList = [
     Rights(
         true, // isExpanded
-        "General information", // header
+        "Your Rights", // header
         Padding( // body text
-          padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
+            padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
             child: DefaultTextStyle(
-                style: TextStyle(fontSize: 24, color: Colors.black),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                        children: <Widget>[
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned")
-                        ]
-                    )
+                style: TextStyle(fontSize: bodyTextSize, color: Colors.black),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("\u2022 You have the right to remain silent"),
+                      Text("\u2022 You do not have to answer questions about where you are going, what you are doing, where you live, or your citizenship"),
+                      Text("\u2022 You do not have to consent to a search"),
+                      Text("(In some states you may be required to provide your name)", style: TextStyle(fontStyle: FontStyle.italic)),
+                    ]
                 )
-              )
+            )
+        )
+    ),
+    Rights(
+        false, // isExpanded
+        "Police are questioning me", // header
+        Padding( // body text
+            padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
+            child: DefaultTextStyle(
+                style: TextStyle(fontSize: bodyTextSize, color: Colors.black),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("\u2022 Say you wish to remain silent"),
+                      Text("\u2022 Do not answer questions"),
+                      Text("\u2022 Do not lie or give false documents"),
+                    ]
+                )
+            )
         )
     ),
     Rights(
@@ -44,16 +63,16 @@ class _MyRightsState extends State<MyRights> {
         Padding( // body text
             padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
             child: DefaultTextStyle(
-                style: TextStyle(fontSize: 24, color: Colors.black),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                        children: <Widget>[
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned")
-                        ]
-                    )
+                style: TextStyle(fontSize: bodyTextSize, color: Colors.black),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("\u2022 Turn off the car, turn on the light inside the car, open the window partway"),
+                      Text("\u2022 Put hands on steering wheel"),
+                      Text("\u2022 Tell officer before reaching for something"),
+                      Text("\u2022 Avoid sudden movements"),
+                      Text("\u2022 Keep your hands where the officer can see them"),
+                    ]
                 )
             )
         )
@@ -64,16 +83,15 @@ class _MyRightsState extends State<MyRights> {
         Padding( // body text
             padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
             child: DefaultTextStyle(
-                style: TextStyle(fontSize: 24, color: Colors.black),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                        children: <Widget>[
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned")
-                        ]
-                    )
+                style: TextStyle(fontSize: bodyTextSize, color: Colors.black),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("\u2022 Do not resist arrest"),
+                      Text("\u2022 Say you wish to remain silent"),
+                      Text("\u2022 Don't answer any questions"),
+                      Text("\u2022 Ask for a lawyer"),
+                    ]
                 )
             )
         )
@@ -84,16 +102,16 @@ class _MyRightsState extends State<MyRights> {
         Padding( // body text
             padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
             child: DefaultTextStyle(
-                style: TextStyle(fontSize: 24, color: Colors.black),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                        children: <Widget>[
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned"),
-                          Text("\u2022 Left aligned")
-                        ]
-                    )
+                style: TextStyle(fontSize: bodyTextSize, color: Colors.black),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("\u2022 Do not invite the officer in"),
+                      Text("\u2022 Talk to them through the door and ask for ID"),
+                      Text("\u2022 If they have a warrant, ask them to slip it under the door or hold it up so you can read it"),
+                      Text("\u2022 Warrant should be signed by a judge and list your address or name"),
+                      Text("\u2022 Even with a warrant, you have the right to remain silent"),
+                    ]
                 )
             )
         )
@@ -124,7 +142,7 @@ class _MyRightsState extends State<MyRights> {
                 body: ListView(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(20.0),
+                      padding: EdgeInsets.all(14.0),
                       child: ExpansionPanelList(
                         expansionCallback: (int index, bool isExpanded) {
                           setState(() {
