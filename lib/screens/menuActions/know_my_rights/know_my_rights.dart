@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 ///File description: Know My Rights page.
 ///User can tap on a container to learn more about individual rights.
 import 'package:flutter/material.dart';
@@ -10,56 +11,99 @@ import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'dart:convert'; // for json
 
 class MyRights extends StatefulWidget {
-  static final String rightsJson = '{"rights": [{"title": "I\'ve been pulled over", "body": "\u2022 do this thing"}, {"title": "Police are at my door", "body": "\u2022 do this thing \u2022 do this other thing"}]}';
-  static final List rightsList = jsonDecode(rightsJson)["rights"] as List;
-  final List<Rights> list = rightsList.map((rights) => Rights.fromJson(rights)).toList();
-
   @override
-  _MyRightsState createState() => _MyRightsState(list);
+  _MyRightsState createState() => _MyRightsState();
 }
 
 class _MyRightsState extends State<MyRights> {
-  List<Rights> _list;
 
-  _MyRightsState(this._list);
-
-  _onExpansion(int index, bool isExpanded) {
-    setState(() {
-      _list[index].isExpanded = !(_list[index].isExpanded);
-    });
-  }
+  List<Rights> rightsList = [
+    Rights(
+        true, // isExpanded
+        "General information", // header
+        Padding( // body text
+          padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
+            child: DefaultTextStyle(
+                style: TextStyle(fontSize: 24, color: Colors.black),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                        children: <Widget>[
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned")
+                        ]
+                    )
+                )
+              )
+        )
+    ),
+    Rights(
+        false, // isExpanded
+        "I've been pulled over", // header
+        Padding( // body text
+            padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
+            child: DefaultTextStyle(
+                style: TextStyle(fontSize: 24, color: Colors.black),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                        children: <Widget>[
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned")
+                        ]
+                    )
+                )
+            )
+        )
+    ),
+    Rights(
+        false, // isExpanded
+        "I'm being arrested", // header
+        Padding( // body text
+            padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
+            child: DefaultTextStyle(
+                style: TextStyle(fontSize: 24, color: Colors.black),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                        children: <Widget>[
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned")
+                        ]
+                    )
+                )
+            )
+        )
+    ),
+    Rights(
+        false, // isExpanded
+        "Police are at my door", // header
+        Padding( // body text
+            padding: EdgeInsets.only(left: 20.0, top: 0.0, right: 20.0, bottom: 20.0),
+            child: DefaultTextStyle(
+                style: TextStyle(fontSize: 24, color: Colors.black),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                        children: <Widget>[
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned"),
+                          Text("\u2022 Left aligned")
+                        ]
+                    )
+                )
+            )
+        )
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     final AuthService _auth = AuthService();
-
-    List<ExpansionPanel> myRights = [];
-    for (int i = 0, li = _list.length; i < li; i++) {
-      var expansionData = _list[i];
-      myRights.add(ExpansionPanel(
-        canTapOnHeader: true,
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Text(expansionData.title,
-                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold
-                    )
-                )
-            );
-          },
-          body: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Text(expansionData.body,
-                  style: TextStyle(
-                      fontSize: 20.0,
-                  )
-              )
-          ),
-          isExpanded: expansionData.isExpanded
-      )
-      );
-    }
 
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
@@ -77,14 +121,38 @@ class _MyRightsState extends State<MyRights> {
                 ),
 
                 ///body
-                body: SingleChildScrollView(
-                    child: Container(
-                      margin: const EdgeInsets.all(16.0),
-                      child: new ExpansionPanelList(
-                          children: myRights, expansionCallback: _onExpansion
+                body: ListView(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: ExpansionPanelList(
+                        expansionCallback: (int index, bool isExpanded) {
+                          setState(() {
+                            rightsList[index].isExpanded = !rightsList[index].isExpanded;
+                          });
+                        },
+                        children: rightsList.map((Rights item) {
+                          return ExpansionPanel(
+                              canTapOnHeader: true,
+                              headerBuilder: (BuildContext context, bool isExpanded) {
+                                return ListTile(
+                                    title: Text(
+                                      item.header,
+                                      style: TextStyle(
+                                        fontSize: 24.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                );
+                              },
+                              isExpanded: item.isExpanded,
+                              body: item.body
+                          );
+                        }).toList(),
                       ),
-                    )
-                )
+                    ),
+                  ],
+                ),
             );
           } else {
             return Loading();
@@ -95,12 +163,12 @@ class _MyRightsState extends State<MyRights> {
 }
 
 class Rights {
-  String title, body;
   bool isExpanded;
+  String header;
+  Widget body;
 
-  Rights(this.title, this.body, {this.isExpanded = false});
+  Rights(this.isExpanded, this.header, this.body);
 
-  factory Rights.fromJson(dynamic json) {
-    return Rights(json["title"] as String, json["body"] as String);
-  }
+//  factory Rights.fromJson(dynamic json) {
+//    return Rights(json["title"] as String, json["body"] as String);
 }
