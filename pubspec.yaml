@@ -29,9 +29,14 @@ dependencies:
   twilio_flutter:
   percent_indicator: ^2.1.5
 
+  image: ^2.1.10
+  pdf: ^1.9.0
+  flutter_full_pdf_viewer: ^1.0.6
+  path_provider: ^1.6.5
+
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  #flutter_test:
+  #  sdk: flutter
   firebase_ml_vision:
   image_picker:
 

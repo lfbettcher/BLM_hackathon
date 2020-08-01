@@ -58,7 +58,7 @@ class _PoliceComplaintPage2State extends State<PoliceComplaintPage2> {
                         child: Column(
                           children: <Widget>[
                             SizedBox(height: 30),
-                            ProgressBar(percent: 0.28),
+                            ProgressBar(percent: 0.2),
                             SizedBox(height: 30),
                             Text("When and where did this incident occur? ", style: TextStyle(fontSize: defaultFontSize)),
                             SizedBox(height: 30),

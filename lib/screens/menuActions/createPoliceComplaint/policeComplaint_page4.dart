@@ -69,7 +69,7 @@ class _PoliceComplaintPage4State extends State<PoliceComplaintPage4> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(height: 30),
-                          ProgressBar(percent: 0.56),
+                          ProgressBar(percent: 0.4),
                           SizedBox(height: 30),
                           Text("Select all involved witnesses: ", style: TextStyle(fontSize: defaultFontSize)),
                           SizedBox(height: 30),

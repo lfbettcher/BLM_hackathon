@@ -6,20 +6,23 @@ import 'package:blmhackathon/shared/progressBar.dart';
 import 'package:blmhackathon/models/policeBadge.dart';
 import 'package:blmhackathon/models/witness.dart';
 import 'package:blmhackathon/models/dateTimeLocationStamp.dart';
+import 'package:blmhackathon/models/licensePlate.dart';
+import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/policeComplaint_page8.dart';
 
-class PoliceComplaintPage6 extends StatefulWidget {
+class PoliceComplaintPage7 extends StatefulWidget {
   final DateTimeLocationStamp dateTimeLocation;
   final List<Badge> badges;
   final List<Witness> witnesses;
+  final List<License> licenses;
   final List<String> complaintReasons;
   final String documentName;
-  PoliceComplaintPage6({this.documentName, this.dateTimeLocation, this.badges, this.witnesses, this.complaintReasons});
+  PoliceComplaintPage7({this.documentName, this.dateTimeLocation, this.badges, this.witnesses, this.licenses, this.complaintReasons});
 
   @override
-  _PoliceComplaintPage6State createState() => _PoliceComplaintPage6State();
+  _PoliceComplaintPage7State createState() => _PoliceComplaintPage7State();
 }
 
-class _PoliceComplaintPage6State extends State<PoliceComplaintPage6> {
+class _PoliceComplaintPage7State extends State<PoliceComplaintPage7> {
   final _formKey = GlobalKey<FormState>();
   FocusNode _focusNode;
   String details = '';
@@ -56,7 +59,7 @@ class _PoliceComplaintPage6State extends State<PoliceComplaintPage6> {
               child: ListView(
                 children: <Widget>[
                   SizedBox(height: 30),
-                  ProgressBar(percent: 0.84),
+                  ProgressBar(percent: 0.7),
                   SizedBox(height: 30),
                   Text("Provide details of the incident. ", style: TextStyle(fontSize: defaultFontSize)),
                   SizedBox(height: 10),
@@ -66,7 +69,6 @@ class _PoliceComplaintPage6State extends State<PoliceComplaintPage6> {
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
-
                           TextField(
                             focusNode: _focusNode,
                             maxLines: null,
@@ -81,10 +83,8 @@ class _PoliceComplaintPage6State extends State<PoliceComplaintPage6> {
                               _focusNode.unfocus();
                             },
                           ),
-
                         ],
                       )
-
                   )
                 ],
               )
@@ -97,17 +97,11 @@ class _PoliceComplaintPage6State extends State<PoliceComplaintPage6> {
           Icon(Icons.arrow_forward, color: color3)
         ],),
         onPressed: (){
-          if (_formKey.currentState.validate()){}
-
-          /*
                   Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => PoliceComplaintPage4(documentName: documentName,)));
-                          */
-
+                          builder: (context) => PoliceComplaintPage8(documentName: widget.documentName, dateTimeLocation: widget.dateTimeLocation, badges: widget.badges, witnesses: widget.witnesses, licenses: widget.licenses, complaintReasons: widget.complaintReasons, details: details)));
         },
       ),
     );
-
   }
 }

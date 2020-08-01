@@ -22,7 +22,7 @@ class _LicenseCardState extends State<LicenseCard> {
     confirmDeleteDialog(BuildContext context){
       return showDialog(context: context, builder: (context){
         return AlertDialog(
-            title: Text("Are you sure you want to delete this license plate entry?"),
+            title: Text("Are you sure you want to delete this badge entry?"),
             content: Row(children: <Widget>[
               SizedBox(height: 25),
               RaisedButton(

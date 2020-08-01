@@ -1,4 +1,4 @@
-///File description: Police complaint page 3. This page lets users select the involved police officers of the incident.
+///File description: Police complaint page 5. This page lets users select the involved license plates of the incident.
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/models/user.dart';
 import 'package:blmhackathon/services/database.dart';
@@ -9,31 +9,35 @@ import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'package:blmhackathon/shared/constants.dart';
 import 'package:blmhackathon/shared/progressBar.dart';
 import 'package:blmhackathon/models/policeBadge.dart';
+import 'package:blmhackathon/models/witness.dart';
 import 'package:blmhackathon/models/dateTimeLocationStamp.dart';
-import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/helperSelectionChips/selectPoliceWidget.dart';
-import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/policeComplaint_page4.dart';
+import 'package:blmhackathon/models/licensePlate.dart';
+import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/policeComplaint_page6.dart';
+import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/helperSelectionChips/selectLicensePlateWidget.dart';
 
-class PoliceComplaintPage3 extends StatefulWidget {
+class PoliceComplaintPage5 extends StatefulWidget {
   final DateTimeLocationStamp dateTimeLocation;
+  final List<Badge> badges;
+  final List<Witness> witnesses;
   final String documentName;
-  PoliceComplaintPage3({this.dateTimeLocation, this.documentName});
+  PoliceComplaintPage5({this.documentName, this.dateTimeLocation, this.badges, this.witnesses});
 
   @override
-  _PoliceComplaintPage3State createState() => _PoliceComplaintPage3State();
+  _PoliceComplaintPage5State createState() => _PoliceComplaintPage5State();
 }
 
-class _PoliceComplaintPage3State extends State<PoliceComplaintPage3> {
-  List<Badge> _officerBadges = <Badge>[];
+class _PoliceComplaintPage5State extends State<PoliceComplaintPage5> {
+  List<License> _licenses = <License>[];
 
-  void toggleSelect(Badge badge){
+  void toggleSelect(License license){
     setState(() {
-      if (_officerBadges.contains(badge)){
-        _officerBadges.removeWhere((Badge removeBadge){
-          return badge == removeBadge;
+      if (_licenses.contains(license)){
+        _licenses.removeWhere((License removeLicense){
+          return license == removeLicense;
         });
       }
-      else {
-        _officerBadges.add(badge);
+      else{
+        _licenses.add(license);
       }
     });
   }
@@ -43,11 +47,11 @@ class _PoliceComplaintPage3State extends State<PoliceComplaintPage3> {
     final user = Provider.of<User>(context);
     final AuthService _auth = AuthService();
 
-    return StreamBuilder<List<Badge>>(
-        stream: DatabaseService(uid: user.uid).badgeData,
+    return StreamBuilder<List<License>>(
+        stream: DatabaseService(uid: user.uid).licenseData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Badge> badges = snapshot.data;
+            List<License> licenses = snapshot.data;
 
             return Scaffold(
 
@@ -67,21 +71,21 @@ class _PoliceComplaintPage3State extends State<PoliceComplaintPage3> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(height: 30),
-                          ProgressBar(percent: 0.3),
+                          ProgressBar(percent: 0.5),
                           SizedBox(height: 30),
-                          Text("Select all involved officers: ", style: TextStyle(fontSize: defaultFontSize)),
+                          Text("Select all involved license plates: ", style: TextStyle(fontSize: defaultFontSize)),
                           SizedBox(height: 30),
                           Expanded(
                             child:
                             ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
-                                itemCount: badges.length,
+                                itemCount: licenses.length,
                                 itemBuilder: (context, index){
                                   return Column(
                                     children: <Widget>[
                                       SizedBox(height: 10),
-                                      SelectPoliceWidget(badge: badges[index], toggleSelect: toggleSelect)
+                                      SelectLicensePlateWidget(license: licenses[index], toggleSelect: toggleSelect)
                                     ],
                                   );
                                 }
@@ -100,7 +104,7 @@ class _PoliceComplaintPage3State extends State<PoliceComplaintPage3> {
                 onPressed: (){
                   Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => PoliceComplaintPage4(documentName: widget.documentName, dateTimeLocation: widget.dateTimeLocation, badges: _officerBadges)));
+                          builder: (context) => PoliceComplaintPage6(documentName: widget.documentName, dateTimeLocation: widget.dateTimeLocation, badges: widget.badges, witnesses: widget.witnesses, licenses: _licenses)));
                 },
               ),
             );

@@ -34,7 +34,7 @@ class _PoliceComplaintPage1State extends State<PoliceComplaintPage1> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 30),
-                  ProgressBar(percent: 0.14),
+                  ProgressBar(percent: 0.1),
                   SizedBox(height: 30),
                   Text("Let's help you file a police complaint. \n First, give your document a name: ", style: TextStyle(fontSize: defaultFontSize)),
                   SizedBox(height: 30),

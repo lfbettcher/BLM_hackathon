@@ -71,11 +71,28 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
     readText();
   }
 
+  RegExp digitRegExp = new RegExp(r'\d');
+  bool isDigit(String s, int idx) => s[idx].contains(digitRegExp);
+  
+  bool containsDigits(String s){
+    RegExp digitRegExp = new RegExp(r'\d');
+    for(var i=0; i<s.length; i++){
+      print(s[i]);
+      if (isDigit(s, i))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   ///Attempts to read text from the image
   Future readText() async {
     FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText.processImage(ourImage);
+
+    print(readText);
 
     String licenseNumber = '';
     for (TextBlock block in readText.blocks){
@@ -83,15 +100,18 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
       for (TextLine line in block.lines){
         print('i am');
         for (TextElement word in line.elements){
-          print('here');
-//          if (isNumeric(word.text)){
-//            licenseNumber += word.text;
-//          }
-          licenseNumber += word.text;
-          print(word.text);
+          ///standard license plates have 6 or 7 chars and a mix of letters/numbers
+          if (containsDigits(word.text) && (word.text.length == 7 || word.text.length == 6))
+            {
+              licenseNumber = word.text;
+              break;
+            }
         }
       }
     }
+
+    print("result of license number:");
+    print(licenseNumber);
     setState(() {
       if (licenseNumber != ''){
         _licensePlate = licenseNumber;

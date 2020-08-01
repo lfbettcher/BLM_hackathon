@@ -63,20 +63,15 @@ class _EmergencyContactsState extends State<EmergencyContacts> {
                 ),
               ),
               floatingActionButton: FloatingActionButton.extended(
-                backgroundColor: color6,
                 label: Row(children: <Widget>[
-                  Icon(Icons.add, color: color3),
+                  Text("Add Emergency Contact", style: TextStyle(fontSize: defaultFontSize, color: color3)),
                   SizedBox(width: 10),
-                  Text("Add", style: TextStyle(fontSize: defaultFontSize, color: color3)),
+                  Icon(Icons.add, color: color3)
                 ],),
                 onPressed: (){
-
-                  /*
                   Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => PoliceComplaintPage4(documentName: documentName,)));
-                          */
-
+                          builder: (context) => AddEmergencyContact()));
                 },
               ),
 

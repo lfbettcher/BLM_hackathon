@@ -1,4 +1,3 @@
-import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/dateTimeStampDocumentation/dateTimeLocationStamp.dart';
 ///File description: Root page for documentation.
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/models/user.dart';
@@ -14,6 +13,7 @@ import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/
 import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/policeBadgeDocumentation/addPoliceBadge.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/licensePlateDocumentation/viewLicensePlates.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/licensePlateDocumentation/addLicensePlate.dart';
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/dateTimeStampDocumentation/dateTimeLocationStamp.dart';
 
 class DocumentSituation extends StatefulWidget {
   @override
@@ -47,13 +47,13 @@ class _DocumentSituationState extends State<DocumentSituation> {
                   children: <Widget>[
                     SizedBox(height: 40),
                     SizedBox(height: 20),
-                    MenuItem(menuName: "Police Badges", viewAllItemsRoute: ViewPoliceBadges(), addNewItemRoute: AddPoliceBadge()),
+                    MenuItem(menuName: "Police Badges", viewAllItemsRoute: ViewPoliceBadges()),
                     SizedBox(height: 20),
-                    MenuItem(menuName: "Witness Contacts", viewAllItemsRoute: ViewWitnessContacts(), addNewItemRoute: AddWitnessContact()),
+                    MenuItem(menuName: "Witness Contacts", viewAllItemsRoute: ViewWitnessContacts()),
                     SizedBox(height: 20),
-                    MenuItem(menuName: "License Plates", viewAllItemsRoute: ViewLicensePlates(), addNewItemRoute: AddLicensePlate()),
+                    MenuItem(menuName: "License Plates", viewAllItemsRoute: ViewLicensePlates()),
                     SizedBox(height: 20),
-                    MenuItem(menuName: "Date/Time Stamps", viewAllItemsRoute: DateTimeLocationStamp(), addNewItemRoute: DateTimeLocationStamp()),
+                    MenuItem(menuName: "Date/Time Stamps", viewAllItemsRoute: DateTimeLocationStamp()),
                   ],
                 )
               )

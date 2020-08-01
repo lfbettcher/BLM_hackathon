@@ -8,19 +8,21 @@ import 'package:blmhackathon/models/witness.dart';
 import 'package:blmhackathon/models/dateTimeLocationStamp.dart';
 import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/helperSelectionChips/selectComplaintReasonsWidget.dart';
 import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/policeComplaint_page7.dart';
+import 'package:blmhackathon/models/licensePlate.dart';
 
-class PoliceComplaintPage5 extends StatefulWidget {
+class PoliceComplaintPage6 extends StatefulWidget {
   final DateTimeLocationStamp dateTimeLocation;
   final List<Badge> badges;
   final List<Witness> witnesses;
+  final List<License> licenses;
   final String documentName;
-  PoliceComplaintPage5({this.documentName, this.dateTimeLocation, this.badges, this.witnesses});
+  PoliceComplaintPage6({this.documentName, this.dateTimeLocation, this.badges, this.witnesses, this.licenses});
 
   @override
-  _PoliceComplaintPage5State createState() => _PoliceComplaintPage5State();
+  _PoliceComplaintPage6State createState() => _PoliceComplaintPage6State();
 }
 
-class _PoliceComplaintPage5State extends State<PoliceComplaintPage5> {
+class _PoliceComplaintPage6State extends State<PoliceComplaintPage6> {
   List<String> _complaintReasons = <String>[];
 
   void toggleSelect(String complaint){
@@ -68,7 +70,7 @@ class _PoliceComplaintPage5State extends State<PoliceComplaintPage5> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(height: 30),
-                          ProgressBar(percent: 0.70),
+                          ProgressBar(percent: 0.6),
                           SizedBox(height: 30),
                           Text("Select your reasons(s) for complaint: ", style: TextStyle(fontSize: defaultFontSize)),
                           SizedBox(height: 30),
@@ -101,7 +103,7 @@ class _PoliceComplaintPage5State extends State<PoliceComplaintPage5> {
                 onPressed: (){
                   Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => PoliceComplaintPage6(documentName: widget.documentName, dateTimeLocation: widget.dateTimeLocation, badges: widget.badges, witnesses: widget.witnesses, complaintReasons: _complaintReasons)));
+                          builder: (context) => PoliceComplaintPage7(documentName: widget.documentName, dateTimeLocation: widget.dateTimeLocation, badges: widget.badges, witnesses: widget.witnesses, licenses: widget.licenses, complaintReasons: _complaintReasons)));
                 },
               ),
             );

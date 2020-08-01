@@ -1,3 +1,4 @@
+import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/policeBadgeDocumentation/addPoliceBadge.dart';
 ///File description: View police badges page
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/models/user.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'package:blmhackathon/screens/menuActions/document_situation/menuActions/policeBadgeDocumentation/badgeCard.dart';
+import 'package:blmhackathon/shared/constants.dart';
 
 class ViewPoliceBadges extends StatefulWidget {
   @override
@@ -53,7 +55,20 @@ class _ViewPoliceBadgesState extends State<ViewPoliceBadges> {
                         ),
                       ],)
                   ),
-                )
+                ),
+
+                floatingActionButton: FloatingActionButton.extended(
+                  label: Row(children: <Widget>[
+                    Icon(Icons.add, color: color3),
+                    SizedBox(width: 10),
+                    Text("Add Police Badge", style: TextStyle(fontSize: defaultFontSize, color: color3)),
+                  ],),
+                  onPressed: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => AddPoliceBadge()));
+                  },
+                ),
               );
             }
             else {
