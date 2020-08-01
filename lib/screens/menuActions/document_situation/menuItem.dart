@@ -6,7 +6,9 @@ import 'package:blmhackathon/shared/constants.dart';
 class MenuItem extends StatefulWidget {
   final String menuName;
   final Widget viewAllItemsRoute;
-  MenuItem({this.menuName, this.viewAllItemsRoute});
+  final Icon icon;
+  final Color color;
+  MenuItem({this.menuName, this.viewAllItemsRoute, this.icon, this.color});
   @override
   _MenuItemState createState() => _MenuItemState();
 }
@@ -18,7 +20,7 @@ class _MenuItemState extends State<MenuItem> {
           width: 375,
           height: 90,
           decoration: new BoxDecoration(
-              color: color5,
+              color: widget.color,
               borderRadius: BorderRadius.all(Radius.circular(20))
           ),
           child: Center(
@@ -29,7 +31,14 @@ class _MenuItemState extends State<MenuItem> {
                   GestureDetector(
                     child: Container(
                         alignment: Alignment.center,
-                        child: Text(widget.menuName, style: TextStyle(color: color3, fontSize: 25))),
+                        child: Row(
+                          children: <Widget>[
+                            widget.icon,
+                            SizedBox(width: 15),
+                            Text(widget.menuName, style: TextStyle(color: color3, fontSize: 20))
+                          ],
+                        )
+                      ),//Text(widget.menuName, style: TextStyle(color: color3, fontSize: 20))),
                     onTap: (){
                       Navigator.of(context).push(
                           MaterialPageRoute(

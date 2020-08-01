@@ -11,6 +11,7 @@ import 'package:blmhackathon/screens/menuActions/document_situation/document_sit
 import 'package:blmhackathon/screens/home/menuItem.dart';
 import 'package:blmhackathon/screens/menuActions/createPoliceComplaint/policeComplaint_page1.dart';
 import 'package:blmhackathon/screens/menuActions/notifyOfArrest/notifyOfArrest.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -35,17 +36,17 @@ class _HomeState extends State<Home> {
         body: Center(
           child: Column(children: <Widget>[
             SizedBox(height: 20),
-            Text("I need to...", style: TextStyle(color: color1, fontSize: defaultFontSize)),
+            Text("I need to...", style: TextStyle(color: color1, fontSize: 25, fontWeight: FontWeight.bold)),
             SizedBox(height: 20),
-            MenuItem(menuName: "Know my rights", route: MyRights()),
+            MenuItem(menuName: "Know my rights", route: MyRights(), icon: Icon(Icons.library_books, color: color3), color: color5),
             SizedBox(height: 20),
-            MenuItem(menuName: "Access my emergency contacts", route: EmergencyContacts()),
+            MenuItem(menuName: "Access my emergency contacts", route: EmergencyContacts(), icon: Icon(Icons.import_contacts, color: color3), color: color2),
             SizedBox(height: 20),
-            MenuItem(menuName: "Document my situation", route: DocumentSituation()),
+            MenuItem(menuName: "Document my situation", route: DocumentSituation(), icon: Icon(FontAwesome5.save, color: color3), color: color5),
             SizedBox(height: 20),
-            MenuItem(menuName: "Create a police complaint", route: PoliceComplaintPage1()),
+            MenuItem(menuName: "Create a police complaint", route: PoliceComplaintPage1(), icon: Icon(Icons.folder_open, color: color3), color: color2),
             SizedBox(height: 20),
-            MenuItem(menuName: "Notify a contact of my arrest", route: NotifyArrest()),
+            MenuItem(menuName: "Notify a contact of my arrest", route: NotifyArrest(), icon: Icon(Icons.phone_iphone, color: color3), color: color5),
           ],),
         )
 

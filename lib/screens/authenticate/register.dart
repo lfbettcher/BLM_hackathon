@@ -32,7 +32,9 @@ class _RegisterState extends State<Register> {
               child: ListView(
                 children: <Widget>[
                   SizedBox(height: 100.0),
-                  Text(title, style: titleDecoration),
+                  Center(child: Text(title, style: titleDecoration)),
+                  SizedBox(height: 10),
+                  Center(child: appDescription()),
                   SizedBox(height: 30),
                   Form(
                       key: _formKey,

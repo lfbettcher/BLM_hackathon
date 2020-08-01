@@ -14,7 +14,7 @@ const color7 = Color(0xff6cb9f0);
 double defaultFontSize = 20;
 
 ///app title
-var title = "Lorem Ipsum";
+var title = "Defenderr";
 
 ///component for form text decoration
 const textInputDecoration = InputDecoration(
@@ -31,6 +31,14 @@ const textInputDecoration = InputDecoration(
 ///component for decorating title text
 const titleDecoration = TextStyle(
     color: color2,
-    fontSize: 40,
+    fontSize: 75,
     fontWeight: FontWeight.bold
 );
+
+///component for app description
+class appDescription extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text("Your first line of defense against arrest.", style: TextStyle(color: color2, fontSize: 18, fontStyle: FontStyle.italic));
+  }
+}

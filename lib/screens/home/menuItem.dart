@@ -6,7 +6,9 @@ import 'package:blmhackathon/shared/constants.dart';
 class MenuItem extends StatefulWidget {
   final String menuName;
   final Widget route;
-  MenuItem({this.menuName, this.route});
+  final Icon icon;
+  final Color color;
+  MenuItem({this.menuName, this.route, this.icon, this.color});
   @override
   _MenuItemState createState() => _MenuItemState();
 }
@@ -19,10 +21,19 @@ class _MenuItemState extends State<MenuItem> {
           width: 375,
           height: 90,
           decoration: new BoxDecoration(
-              color: color5,
+              color: widget.color,
               borderRadius: BorderRadius.all(Radius.circular(20))
           ),
-          child: Center(child: Text(widget.menuName, style: TextStyle(color: color3, fontSize: 25)))
+          child: Center(
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: 30),
+                widget.icon,
+                SizedBox(width: 15),
+                Text(widget.menuName, style: TextStyle(color: color3, fontSize: 20))
+              ],
+            )
+          )//Center(child: Text(widget.menuName, style: TextStyle(color: color3, fontSize: 25)))
       ),
       onTap: (){
         Navigator.of(context).push(
