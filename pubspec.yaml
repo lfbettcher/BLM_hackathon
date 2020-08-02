@@ -28,6 +28,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   twilio_flutter:
   percent_indicator: ^2.1.5
+  flutter_icons: ^1.1.0
 
   image: ^2.1.10
   pdf: ^1.9.0

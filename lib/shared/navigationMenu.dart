@@ -7,6 +7,7 @@ import 'package:blmhackathon/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:blmhackathon/shared/loading.dart';
 import 'package:blmhackathon/screens/home/home.dart';
+import 'package:blmhackathon/screens/about/about.dart';
 
 class NavigationMenu extends StatefulWidget {
   @override
@@ -48,6 +49,22 @@ class _NavigationMenuState extends State<NavigationMenu> {
                             context,
                             new MaterialPageRoute(
                                 builder: (BuildContext context) => new Home()));
+                        },
+                      ),
+
+                      ///about navigation menu item
+                      new ListTile(
+                        title: Row(children: <Widget>[
+                          Icon(Icons.info_outline),
+                          SizedBox(width: 5),
+                          Text("About")
+                        ],),
+                        onTap: (){
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (BuildContext context) => new About()));
                         },
                       ),
 
