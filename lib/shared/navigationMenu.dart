@@ -68,17 +68,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
                         },
                       ),
 
-                      ///settings navigation menu item
-                      new ListTile(
-                        title: Row(children: <Widget>[
-                          Icon(Icons.settings),
-                          SizedBox(width: 5),
-                          Text("Settings")
-                        ],),
-                        onTap: (){
-                        },
-                      ),
-
                       ///log out navigation menu item
                       new ListTile(
                         title: Row(children: <Widget>[
