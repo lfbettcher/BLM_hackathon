@@ -199,34 +199,6 @@ class DatabaseService {
     });
   }
 
-  ///create a new pdf structure for police complaints. Called on when the user starts on a new document and submits a name.
-  Future createNewPoliceComplaint(String docName) async {
-    await userCollection.document(uid).collection("policeComplaints").document().setData({
-      'documentName' : docName,
-      'complaintReasons' : '',
-      'date' : '',
-      'time' : '',
-      'location' : '',
-      'policeBadges' : '',
-      'witnesses' : '',
-      'incidentDetails' : ''
-    });
-
-    ///set the document ID
-    CollectionReference docRef = userCollection.document(uid).collection("policeComplaints");
-    docRef.getDocuments().then((ds){
-      if (ds != null){
-        ds.documents.forEach((value){
-          print(value.data['documentName']);
-          if (value.data['documentName'] == docName){
-            //print(value.documentID);
-            currentEditingDocument = value.documentID;
-          }
-        });
-      }
-    });
-  }
-
   ///**********************Deleting existing documents****************************///
 
   Future deleteWitness(String witnessId) async {

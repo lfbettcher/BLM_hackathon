@@ -5,7 +5,9 @@ import 'package:blmhackathon/services/auth.dart';
 import 'package:blmhackathon/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() async{
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

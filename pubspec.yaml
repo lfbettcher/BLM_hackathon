@@ -8,7 +8,7 @@ description: A new Flutter application.
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
@@ -29,11 +29,13 @@ dependencies:
   twilio_flutter:
   percent_indicator: ^2.1.5
   flutter_icons: ^1.1.0
-
   image: ^2.1.10
   pdf: ^1.9.0
   flutter_full_pdf_viewer: ^1.0.6
   path_provider: ^1.6.5
+  flutter_downloader: ^1.4.4
+  permission_handler: ^5.0.1
+  firebase_storage: any
 
 dev_dependencies:
   #flutter_test:

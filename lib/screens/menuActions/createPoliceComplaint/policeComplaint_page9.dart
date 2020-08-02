@@ -1,4 +1,4 @@
-///File description: Police complaint page 10. This page creates the pdf and allows the user to email it to themselves.
+///File description: Police complaint page 10. This page creates the pdf and allows the user to download it.
 import 'package:flutter/material.dart';
 import 'package:blmhackathon/shared/navigationMenu.dart';
 import 'package:blmhackathon/shared/constants.dart';
@@ -11,8 +11,16 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:permission_handler/permission_handler.dart';
 import 'pdfPreviewScreen.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:blmhackathon/models/user.dart';
+import 'package:blmhackathon/services/database.dart';
+import 'package:blmhackathon/services/auth.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:blmhackathon/shared/loading.dart';
 
 class PoliceComplaintPage9 extends StatefulWidget {
   final DateTimeLocationStamp dateTimeLocation;
@@ -41,6 +49,8 @@ class _PoliceComplaintPage9State extends State<PoliceComplaintPage9> {
   String complaintReasons = '';
   String complaintDetails = '';
   String licenses = '';
+  String downloadURL = '';
+  String localStoragePath = '';
 
   getTodaysDate(){
     final now = new DateTime.now();
@@ -178,14 +188,14 @@ class _PoliceComplaintPage9State extends State<PoliceComplaintPage9> {
               text: "This complaint is made on the basis that the police officers engaged in either police misconduct or maladministration as defined by law enforement conduct. I request that this complaint is subject to an evidence-based investigation."
             ),
             pw.Paragraph(
-              text: "I have attached my contact information below. Please contact me if you require any further information. \n"
+              text: "I have attached my contact information below. Please contact me if you require any further information."
             ),
             pw.Paragraph(
-              text: "Email: ${widget.userEmail} \nPhone: ${widget.userPhone} \nAlternate Phone: ${widget.userAltPhone}\n\nYours faithfully,\n ${widget.userFullName}"
+              text: "Email: ${widget.userEmail} \nPhone: ${widget.userPhone} \nAlternate Phone: ${widget.userAltPhone}"
             ),
             pw.Paragraph(
               text: "Yours faithfully, \n ${widget.userFullName}"
-            )
+            ),
           ];
         }
       )
@@ -193,15 +203,37 @@ class _PoliceComplaintPage9State extends State<PoliceComplaintPage9> {
   }
 
   Future savePdf() async {
+      /// save to local app storage
       Directory documentDirectory = await getApplicationDocumentsDirectory();
       String documentPath = documentDirectory.path;
-      File file = File("$documentPath/example.pdf");
+      File file = File("$documentPath/${widget.documentName}.pdf");
+      String filePath = "$documentPath/${widget.documentName}.pdf";
       file.writeAsBytesSync(pdf.save());
+
+      /// save to firebase storage
+      final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(filePath);
+      final StorageUploadTask task = firebaseStorageRef.putFile(file);
+      String url = await firebaseStorageRef.getDownloadURL();
+      print("url: $url");
+      setState(() {
+        downloadURL = url;
+        localStoragePath = filePath;
+      });
+      print("download url: $downloadURL");
+  }
+
+
+  void initializeDownloader() async{
+    WidgetsFlutterBinding.ensureInitialized();
+    await FlutterDownloader.initialize(
+        debug: true // optional: set false to disable printing logs to console
+    );
   }
 
   @override
   void initState() {
     super.initState();
+    initializeDownloader();
     getTodaysDate();
     getDateTimeLocation();
     getWitnesses();
@@ -214,57 +246,107 @@ class _PoliceComplaintPage9State extends State<PoliceComplaintPage9> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
+    final user = Provider.of<User>(context);
+    final AuthService _auth = AuthService();
 
-      ///menu slider window
-      drawer: NavigationMenu(),
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+    builder: (context, snapshot) {
+        if (snapshot.hasData) {
+        UserData userData = snapshot.data;
+        return
+          Scaffold(
+            resizeToAvoidBottomInset: true,
 
-      ///app bar
-      appBar: new AppBar(
-          title: new Text("Create a new police complaint")
-      ),
+            ///menu slider window
+            drawer: NavigationMenu(),
 
-      ///body
-      body: Center(
-          child: Container(
-              width: 300,
-              child: ListView(
-                children: <Widget>[
-                  SizedBox(height: 30),
-                  ProgressBar(percent: 1.0),
-                  SizedBox(height: 30),
-                  GestureDetector(
-                    child: Row(children: <Widget>[
-                      Text("Preview document"),
-                      SizedBox(width: 10),
-                      Icon(Icons.picture_as_pdf)
-                    ],),
-                  onTap: () async {
-                    Directory documentDirectory = await getApplicationDocumentsDirectory();
-                    String documentPath = documentDirectory.path;
-                    String fullPath = "$documentPath/example.pdf";
-                    print("nav");
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => PdfPreviewScreen(path: fullPath)
-                    ));
-                  },
-                  ),
-                  SizedBox(height: 30),
-                  Text("What email should we send your report to? ", style: TextStyle(fontSize: defaultFontSize)),
-                  SizedBox(height: 10),
+            ///app bar
+            appBar: new AppBar(
+                title: new Text("Create a new police complaint")
+            ),
 
-                ],
-              )
-          )
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Row(children: <Widget>[
-          Text("Next", style: TextStyle(fontSize: defaultFontSize, color: color3)),
-          SizedBox(width: 10),
-          Icon(Icons.arrow_forward, color: color3)
-        ],),
-      ),
+            ///body
+            body: Center(
+                child: Container(
+                    width: 300,
+                    child: ListView(
+                      children: <Widget>[
+                        SizedBox(height: 30),
+                        ProgressBar(percent: 1.0),
+                        SizedBox(height: 50),
+                        ButtonTheme(
+                          minWidth: 200.0,
+                          height: 100.0,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(children: <Widget>[
+                              Text("      Preview document", style: TextStyle(color: color3, fontSize: defaultFontSize)),
+                              SizedBox(width: 10),
+                              Icon(Icons.picture_as_pdf, color: color3)
+                            ],),
+                            color: color5,
+                            onPressed: () async {
+                              Directory documentDirectory = await getApplicationDocumentsDirectory();
+                              String documentPath = documentDirectory.path;
+                              String fullPath = "$localStoragePath";
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => PdfPreviewScreen(path: fullPath)
+                              ));
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 50),
+                        ButtonTheme(
+                          minWidth: 200.0,
+                          height: 100.0,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              children: <Widget>[
+                                Text("      Download document", style: TextStyle(color: color3, fontSize: defaultFontSize)),
+                                Icon(Icons.file_download, color: color3)
+                              ],
+                            ),
+                            color: color6,
+                            onPressed: () async {
+                              final status = await Permission.storage.request();
+                              if(status.isGranted){
+                                final externalDir = await getExternalStorageDirectory();
+                                final id = await FlutterDownloader.enqueue(
+                                    url: downloadURL,
+                                    savedDir: externalDir.path,
+                                    fileName: "${widget.documentName}",
+                                    showNotification: true,
+                                    openFileFromNotification: true
+                                );
+                              }
+                              else{
+                                print("Permission denied");
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                      ],
+                    )
+                )
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              label: Row(children: <Widget>[
+                Text("Done", style: TextStyle(fontSize: defaultFontSize, color: color3)),
+                SizedBox(width: 10),
+                Icon(Icons.done, color: color3)
+              ],),
+            ),
+          );
+        }
+        else {
+          return Loading();
+        }
+      }
     );
   }
 }
