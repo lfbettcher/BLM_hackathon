@@ -43,7 +43,7 @@ class _PoliceComplaintPage1State extends State<PoliceComplaintPage1> {
                     child: Column(
                       children: <Widget>[
                         TextFormField(
-                          decoration: textInputDecoration.copyWith(hintText: ""),
+                          decoration: textInputDecoration.copyWith(hintText: "Document name"),
                           validator: (val) => val.isEmpty || val == "" ? "Enter a document name" : null,
                           onChanged: (val){
                             setState(() => documentName = val);
