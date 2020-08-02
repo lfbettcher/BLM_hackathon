@@ -87,6 +87,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
                           Text("Log Out")
                         ],),
                         onTap: (){
+                          Navigator.of(context).popUntil((route) => route.isFirst);
                           _auth.signOut();
                         },
                       )
