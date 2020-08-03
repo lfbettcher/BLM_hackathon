@@ -85,7 +85,7 @@ class _DateTimeLocationStampState extends State<DateTimeLocationStamp> {
 
               ///app bar
               appBar: new AppBar(
-                  title: new Text("Date/Time Stamps")
+                  title: new Text("Date/Time/Location Stamps")
               ),
 
               ///body
@@ -105,7 +105,7 @@ class _DateTimeLocationStampState extends State<DateTimeLocationStamp> {
                       Row(children: <Widget>[
                         Icon(Icons.calendar_today),
                         SizedBox(width: 10),
-                        Text("Current time: ${formattedDate}", style: TextStyle(fontSize: defaultFontSize))
+                        Text("Current date: ${formattedDate}", style: TextStyle(fontSize: defaultFontSize))
                       ],),
                       SizedBox(height: 30),
                       Visibility(

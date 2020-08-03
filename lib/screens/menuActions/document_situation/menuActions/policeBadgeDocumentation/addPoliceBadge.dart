@@ -140,9 +140,10 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                               children: <Widget>[
                                 ButtonBar(children: <Widget>[
                                   RaisedButton(
+                                    color: color2,
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Camera", style: TextStyle(fontSize: 25)),
+                                        Text("Camera", style: TextStyle(fontSize: 25, color: color3)),
                                         SizedBox(width: 15),
                                         Icon(Icons.camera)
                                       ],
@@ -152,9 +153,10 @@ class _AddPoliceBadgeState extends State<AddPoliceBadge> {
                                     },
                                   ),
                                   RaisedButton(
+                                    color: color1,
                                     child: Row(
                                       children: <Widget>[
-                                        Text("Gallery", style: TextStyle(fontSize: 25)),
+                                        Text("Gallery", style: TextStyle(fontSize: 25, color: color3)),
                                         SizedBox(width: 15),
                                         Icon(Icons.photo_album)
                                       ],

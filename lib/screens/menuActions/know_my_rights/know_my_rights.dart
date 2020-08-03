@@ -120,14 +120,8 @@ class _MyRightsState extends State<MyRights> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-    final AuthService _auth = AuthService();
 
-    return StreamBuilder<UserData>(
-        stream: DatabaseService(uid: user.uid).userData,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            UserData userData = snapshot.data;
+
             return Scaffold(
 
                 ///menu slider window
@@ -172,11 +166,7 @@ class _MyRightsState extends State<MyRights> {
                   ],
                 ),
             );
-          } else {
-            return Loading();
-          }
-        }
-    );
+
   }
 }
 

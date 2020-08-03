@@ -164,6 +164,7 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
                               children: <Widget>[
                                 ButtonBar(children: <Widget>[
                                   RaisedButton(
+                                    color: color2,
                                     child: Row(
                                       children: <Widget>[
                                         Text("Camera", style: TextStyle(fontSize: 25)),
@@ -176,6 +177,7 @@ class _AddLicensePlateState extends State<AddLicensePlate> {
                                     },
                                   ),
                                   RaisedButton(
+                                    color: color1,
                                     child: Row(
                                       children: <Widget>[
                                         Text("Gallery", style: TextStyle(fontSize: 25)),

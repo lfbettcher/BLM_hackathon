@@ -206,34 +206,24 @@ class _PoliceComplaintPage9State extends State<PoliceComplaintPage9> {
       /// save to local app storage
       Directory documentDirectory = await getApplicationDocumentsDirectory();
       String documentPath = documentDirectory.path;
-      File file = File("$documentPath/${widget.documentName}.pdf");
-      String filePath = "$documentPath/${widget.documentName}.pdf";
+      File file = File("$documentPath/example.pdf");
+      String filePath = "$documentPath/example.pdf";
       file.writeAsBytesSync(pdf.save());
 
       /// save to firebase storage
-      final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(filePath);
+      final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child("$documentPath/example.pdf");
       final StorageUploadTask task = firebaseStorageRef.putFile(file);
       String url = await firebaseStorageRef.getDownloadURL();
-      print("url: $url");
+
       setState(() {
         downloadURL = url;
         localStoragePath = filePath;
       });
-      print("download url: $downloadURL");
-  }
-
-
-  void initializeDownloader() async{
-    WidgetsFlutterBinding.ensureInitialized();
-    await FlutterDownloader.initialize(
-        debug: true // optional: set false to disable printing logs to console
-    );
   }
 
   @override
   void initState() {
     super.initState();
-    initializeDownloader();
     getTodaysDate();
     getDateTimeLocation();
     getWitnesses();
