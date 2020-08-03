@@ -31,11 +31,11 @@ We wanted to create a multi-functional mobile app that empowers people, especial
 * Trying to understand the challenges that other POC encounter
 * Marketing our app and the best way to present our ideas
 
-## Accomplishments that I'm proud of
+## Accomplishments that We're proud of
 * Learning mobile development on Flutter
 * Learning about how to create a marketing pitch
 
-## What I learned
+## What We learned
 * The reality of racial injustice
 * Individual rights
 * Different situations in which police aggression and injustice may occur
