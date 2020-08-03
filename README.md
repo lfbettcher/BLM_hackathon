@@ -1,17 +1,47 @@
-# blmhackathon
+# Defenderr
+Created for Black Lives Matter Hackathon (2020)
 
-A new Flutter application.
+## Team Cat Lady Coders
+Calista Wong
+Karen Berba
+Lisa Bettcher
 
-## Getting Started
+## Video Demo
+https://youtu.be/pivrrt0XFSE
 
-This project is a starting point for a Flutter application.
+## Devpost Submission Link
+https://devpost.com/software/defenderr-iaj80l
 
-A few resources to get you started if this is your first Flutter project:
+## Inspiration
+We wanted to create a multi-functional mobile app that empowers people, especially those of targeted demographics, to stand up against police brutality and injustice.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## What it does
+* Informs users on their rights based on their individual situations
+* Provides a guideline on the pieces of information that should be collected in a police encounter
+* Sends an auto-generated text message with location data to an emergency contact in the case of an arrest
+* Guides the user to create a police complaint letter through an auto-generated template
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# BLM_hackathon" 
+## How We built it
+* Firebase and Flutter
+
+## Challenges We ran into
+* Delegating tasks in a team
+* Working with different environments and getting all of our apps to sync
+* Developing features that are practical and usable to people facing police brutality
+* Trying to understand the challenges that other POC encounter
+* Marketing our app and the best way to present our ideas
+
+## Accomplishments that We're proud of
+* Learning mobile development on Flutter
+* Learning about how to create a marketing pitch
+
+## What We learned
+* The reality of racial injustice
+* Individual rights
+* Different situations in which police aggression and injustice may occur
+
+## What's next for Defenderr
+* Supporting photo documentation in creating police reports
+* Voice-activated functions, for situations when users are not able to access their phones easily
+* Voice to text transcription
+* Release for IOS
